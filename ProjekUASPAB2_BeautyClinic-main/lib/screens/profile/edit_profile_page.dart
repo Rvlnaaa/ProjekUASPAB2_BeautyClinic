@@ -8,31 +8,42 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  final TextEditingController nameController = TextEditingController(
+
+  final TextEditingController nameController =
+      TextEditingController(
     text: 'Leonica User',
   );
 
-  final TextEditingController emailController = TextEditingController(
+  final TextEditingController emailController =
+      TextEditingController(
     text: 'user@gmail.com',
   );
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Edit Profile')),
+      appBar: AppBar(
+        title: const Text('Edit Profile'),
+      ),
 
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
 
         child: Column(
           children: [
+
             const SizedBox(height: 20),
 
             const CircleAvatar(
               radius: 55,
               backgroundColor: Colors.amber,
 
-              child: Icon(Icons.person, size: 60, color: Colors.white),
+              child: Icon(
+                Icons.person,
+                size: 60,
+                color: Colors.white,
+              ),
             ),
 
             const SizedBox(height: 40),
@@ -71,15 +82,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
               child: ElevatedButton(
                 onPressed: () {
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text('Profile berhasil diperbarui'),
+                      content: Text(
+                        'Profile berhasil diperbarui',
+                      ),
                     ),
                   );
                 },
 
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.amber,
+
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
@@ -87,7 +102,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
                 child: const Text(
                   'Simpan',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

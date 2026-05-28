@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 
+import '../main.dart';
 import '../screens/favorite/favorite_page.dart';
 import '../screens/home/home_page.dart';
 import '../screens/news/news_page.dart';
 import '../screens/profile/profile_page.dart';
 
 class BottomNavbar extends StatefulWidget {
-  const BottomNavbar({super.key});
+  BottomNavbar({super.key});
 
   @override
-  State<BottomNavbar> createState() => _BottomNavbarState();
+  State<BottomNavbar> createState() =>
+      _BottomNavbarState();
 }
 
-class _BottomNavbarState extends State<BottomNavbar> {
+class _BottomNavbarState
+    extends State<BottomNavbar> {
+
   int currentIndex = 0;
 
   final List<Widget> pages = [
@@ -24,37 +28,84 @@ class _BottomNavbarState extends State<BottomNavbar> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: pages[currentIndex],
 
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
+    return ValueListenableBuilder(
+      valueListenable: isEnglishNotifier,
 
-        onTap: (index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
+      builder: (
+        context,
+        bool isEnglish,
+        child,
+      ) {
 
-        selectedItemColor: Colors.amber,
+        return Scaffold(
+          body: pages[currentIndex],
 
-        unselectedItemColor: Colors.grey,
+          bottomNavigationBar:
+              BottomNavigationBar(
+            currentIndex: currentIndex,
 
-        type: BottomNavigationBarType.fixed,
+            onTap: (index) {
 
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              setState(() {
+                currentIndex = index;
+              });
+            },
 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorite',
+            selectedItemColor:
+                Colors.amber,
+
+            unselectedItemColor:
+                Colors.grey,
+
+            type:
+                BottomNavigationBarType
+                    .fixed,
+
+            items: [
+
+              BottomNavigationBarItem(
+                icon:
+                    const Icon(Icons.home),
+
+                label: isEnglish
+                    ? 'Home'
+                    : 'Beranda',
+              ),
+
+              BottomNavigationBarItem(
+                icon: const Icon(
+                  Icons.favorite,
+                ),
+
+                label: isEnglish
+                    ? 'Favorite'
+                    : 'Favorit',
+              ),
+
+              BottomNavigationBarItem(
+                icon: const Icon(
+                  Icons.article,
+                ),
+
+                label: isEnglish
+                    ? 'News'
+                    : 'Berita',
+              ),
+
+              BottomNavigationBarItem(
+                icon: const Icon(
+                  Icons.person,
+                ),
+
+                label: isEnglish
+                    ? 'Profile'
+                    : 'Profil',
+              ),
+            ],
           ),
-
-          BottomNavigationBarItem(icon: Icon(Icons.article), label: 'News'),
-
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-      ),
+        );
+      },
     );
   }
 }

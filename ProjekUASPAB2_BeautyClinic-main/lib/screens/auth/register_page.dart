@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../main.dart';
 import 'package:beauty_clinic_app/utils/app_colors.dart';
 import 'package:beauty_clinic_app/widgets/custom_button.dart';
 import 'package:beauty_clinic_app/widgets/custom_textfield.dart';
@@ -8,90 +10,170 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.white,
 
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
+    return ValueListenableBuilder(
+      valueListenable: isEnglishNotifier,
 
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      builder: (
+        context,
+        bool isEnglish,
+        child,
+      ) {
 
-              children: [
-                const SizedBox(height: 40),
+        return Scaffold(
+          backgroundColor:
+              AppColors.white,
 
-                Text(
-                  'Register Account',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primary,
-                  ),
-                ),
+          body: SafeArea(
+            child: Padding(
+              padding:
+                  const EdgeInsets.all(24),
 
-                const SizedBox(height: 10),
-
-                const Text(
-                  'Silahkan isi data terlebih dahulu',
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
-                ),
-
-                const SizedBox(height: 40),
-
-                const CustomTextField(hintText: 'Masukkan Nama'),
-
-                const SizedBox(height: 20),
-
-                const CustomTextField(hintText: 'Masukkan Email'),
-
-                const SizedBox(height: 20),
-
-                const CustomTextField(
-                  hintText: 'Masukkan Password',
-                  obscureText: true,
-                ),
-
-                const SizedBox(height: 20),
-
-                const CustomTextField(
-                  hintText: 'Konfirmasi Password',
-                  obscureText: true,
-                ),
-
-                const SizedBox(height: 30),
-
-                CustomButton(text: 'Daftar', onPressed: () {}),
-
-                const SizedBox(height: 40),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment:
+                      CrossAxisAlignment
+                          .start,
 
                   children: [
-                    const Text('Sudah memiliki akun?'),
 
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+                    const SizedBox(
+                      height: 40,
+                    ),
 
-                      child: Text(
-                        'Masuk',
-                        style: TextStyle(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Text(
+                      isEnglish
+                          ? 'Register Account'
+                          : 'Daftar Akun',
+
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight:
+                            FontWeight.bold,
+                        color:
+                            AppColors.primary,
                       ),
+                    ),
+
+                    const SizedBox(
+                      height: 10,
+                    ),
+
+                    Text(
+                      isEnglish
+                          ? 'Please fill in the data first'
+                          : 'Silahkan isi data terlebih dahulu',
+
+                      style:
+                          const TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      height: 40,
+                    ),
+
+                    CustomTextField(
+                      hintText: isEnglish
+                          ? 'Enter Name'
+                          : 'Masukkan Nama',
+                    ),
+
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                    CustomTextField(
+                      hintText: isEnglish
+                          ? 'Enter Email'
+                          : 'Masukkan Email',
+                    ),
+
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                    CustomTextField(
+                      hintText: isEnglish
+                          ? 'Enter Password'
+                          : 'Masukkan Password',
+
+                      obscureText: true,
+                    ),
+
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                    CustomTextField(
+                      hintText: isEnglish
+                          ? 'Confirm Password'
+                          : 'Konfirmasi Password',
+
+                      obscureText: true,
+                    ),
+
+                    const SizedBox(
+                      height: 30,
+                    ),
+
+                    CustomButton(
+                      text: isEnglish
+                          ? 'Register'
+                          : 'Daftar',
+
+                      onPressed: () {},
+                    ),
+
+                    const SizedBox(
+                      height: 40,
+                    ),
+
+                    Row(
+                      mainAxisAlignment:
+                          MainAxisAlignment
+                              .center,
+
+                      children: [
+
+                        Text(
+                          isEnglish
+                              ? 'Already have an account?'
+                              : 'Sudah memiliki akun?',
+                        ),
+
+                        TextButton(
+                          onPressed: () {
+
+                            Navigator.pop(
+                                context);
+                          },
+
+                          child: Text(
+                            isEnglish
+                                ? 'Login'
+                                : 'Masuk',
+
+                            style: TextStyle(
+                              color:
+                                  AppColors.primary,
+
+                              fontWeight:
+                                  FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

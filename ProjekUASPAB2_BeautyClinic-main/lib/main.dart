@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'utils/app_theme.dart';
 import 'screens/splash/splash_page.dart';
 
+ValueNotifier<ThemeMode> themeNotifier =
+    ValueNotifier(ThemeMode.light);
+
+ValueNotifier<bool> isEnglishNotifier =
+    ValueNotifier(false);
+
 void main() {
   runApp(const MyApp());
 }
@@ -11,12 +17,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
 
-      theme: AppTheme.lightTheme,
+    return ValueListenableBuilder(
+      valueListenable: themeNotifier,
 
-      home: const SplashPage(),
+      builder: (
+        context,
+        ThemeMode currentMode,
+        child,
+      ) {
+
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+
+          theme: ThemeData.light(),
+
+          darkTheme: ThemeData.dark(),
+
+          themeMode: currentMode,
+
+          home: const SplashPage(),
+        );
+      },
     );
   }
 }
