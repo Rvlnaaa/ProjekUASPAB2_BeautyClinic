@@ -21,188 +21,379 @@ class HomePage extends StatelessWidget {
       ) {
 
         return Scaffold(
-          backgroundColor:
-              Theme.of(context)
-                  .scaffoldBackgroundColor,
 
-          appBar: AppBar(
-            backgroundColor:
-                Theme.of(context)
-                    .scaffoldBackgroundColor,
+  body: Stack(
+    children: [
 
-            elevation: 0,
+      /// BACKGROUND IMAGE
+      Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              'assets/klinik.jpg',
+            ),
 
-            actions: [
-
-              IconButton(
-                onPressed: () {
-
-                  Navigator.push(
-                    context,
-
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const NotificationPage(),
-                    ),
-                  );
-                },
-
-                icon: Icon(
-                  Icons.notifications,
-
-                  color:
-                      Theme.of(context)
-                          .iconTheme
-                          .color,
-                ),
-              ),
-            ],
+            fit: BoxFit.cover,
           ),
+        ),
+      ),
 
-          body: SafeArea(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding:
-                    const EdgeInsets.all(20),
+      /// OVERLAY SAMA KAYAK LOGIN & REGISTER
+      Container(
+        color: Colors.white.withOpacity(
+            0.35),
+      ),
 
-                child: Column(
-                  crossAxisAlignment:
-                      CrossAxisAlignment
-                          .start,
+      SafeArea(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.all(20),
 
-                  children: [
+                    child: Column(
+                      crossAxisAlignment:
+                          CrossAxisAlignment
+                              .start,
 
-                    /// SEARCH BAR
-                    GestureDetector(
-                      onTap: () {
+                      children: [
 
-                        Navigator.push(
-                          context,
+                        /// APPBAR ICON
+                        Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .end,
 
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const SearchPage(),
-                          ),
-                        );
-                      },
-
-                      child: Container(
-                        padding:
-                            const EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 15,
-                        ),
-
-                        decoration: BoxDecoration(
-                          color:
-                              Colors.grey.shade100,
-
-                          borderRadius:
-                              BorderRadius.circular(
-                            15,
-                          ),
-                        ),
-
-                        child: Row(
                           children: [
 
-                            const Icon(
-                              Icons.search,
-                              color: Colors.grey,
-                            ),
+                            IconButton(
+                              onPressed: () {
 
-                            const SizedBox(
-                              width: 10,
-                            ),
+                                Navigator.push(
+                                  context,
 
-                            Text(
-                              isEnglish
-                                  ? 'Search'
-                                  : 'Cari',
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const NotificationPage(),
+                                  ),
+                                );
+                              },
 
-                              style:
-                                  const TextStyle(
-                                color: Colors.grey,
-                                fontSize: 16,
+                              icon: const Icon(
+                                Icons.notifications,
+                                color: Colors.white,
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ),
 
-                    const SizedBox(height: 25),
+                        const SizedBox(height: 10),
 
-                    /// TITLE
-                    Text(
-                      isEnglish
-                          ? 'Beauty Clinic'
-                          : 'Klinik Kecantikan',
+                        /// TITLE
+                        Center(
+  child: Column(
+    children: [
 
-                      style: const TextStyle(
-                        fontSize: 32,
-                        fontWeight:
-                            FontWeight.bold,
-                      ),
-                    ),
+      Text(
+        isEnglish
+            ? 'Beauty Clinic'
+            : 'Klinik Kecantikan',
 
-                    const SizedBox(height: 20),
+        textAlign: TextAlign.center,
 
-                    /// PROMO CARD
-                    Container(
-                      height: 150,
-                      width: double.infinity,
+        style: const TextStyle(
+          fontSize: 34,
+          fontWeight:
+              FontWeight.bold,
 
-                      decoration: BoxDecoration(
-                        color:
-                            const Color(0xFFB89B3C),
+          color: Colors.white,
+        ),
+      ),
 
-                        borderRadius:
-                            BorderRadius.circular(
-                          25,
+      const SizedBox(height: 8),
+
+      Text(
+        isEnglish
+            ? 'Welcome and stay beautiful ✨'
+            : 'Selamat datang dan tetap cantik ✨',
+
+        textAlign: TextAlign.center,
+
+        style: const TextStyle(
+          fontSize: 16,
+          color: Colors.white70,
+        ),
+      ),
+    ],
+  ),
+),
+
+const SizedBox(height: 30),
+
+                        /// SEARCH BAR
+                        GestureDetector(
+                          onTap: () {
+
+                            Navigator.push(
+                              context,
+
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const SearchPage(),
+                              ),
+                            );
+                          },
+
+                          child: Container(
+                            padding:
+                                const EdgeInsets.symmetric(
+                              horizontal: 15,
+                              vertical: 15,
+                            ),
+
+                            decoration:
+                                BoxDecoration(
+                              color: Colors.white
+                                  .withOpacity(
+                                      0.85),
+
+                              borderRadius:
+                                  BorderRadius.circular(
+                                15,
+                              ),
+                            ),
+
+                            child: Row(
+                              children: [
+
+                                const Icon(
+                                  Icons.search,
+                                  color: Colors.grey,
+                                ),
+
+                                const SizedBox(
+                                  width: 10,
+                                ),
+
+                                Text(
+                                  isEnglish
+                                      ? 'Search'
+                                      : 'Cari',
+
+                                  style:
+                                      const TextStyle(
+                                    color:
+                                        Colors.grey,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
 
-                      child: Center(
-                        child: Text(
+                        const SizedBox(height: 30),
+
+                        /// PROMO CARD
+                        Container(
+                          height: 170,
+                          width: double.infinity,
+
+                          decoration:
+                              BoxDecoration(
+                            gradient:
+                                const LinearGradient(
+                              colors: [
+                                Color(0xFFD4AF37),
+                                Color(0xFFB8860B),
+                              ],
+                            ),
+
+                            borderRadius:
+                                BorderRadius.circular(
+                              25,
+                            ),
+                          ),
+
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment:
+                                  MainAxisAlignment
+                                      .center,
+
+                              children: [
+
+                                Text(
+                                  isEnglish
+                                      ? 'Special Day Promo'
+                                      : 'Promo Hari Spesial',
+
+                                  style:
+                                      const TextStyle(
+                                    color:
+                                        Colors.white,
+
+                                    fontSize: 28,
+
+                                    fontWeight:
+                                        FontWeight
+                                            .bold,
+                                  ),
+                                ),
+
+                                const SizedBox(
+                                    height: 10),
+
+                                const Text(
+                                  '50% OFF',
+                                  style: TextStyle(
+                                    color:
+                                        Colors.white,
+
+                                    fontSize: 36,
+
+                                    fontWeight:
+                                        FontWeight
+                                            .bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        const SizedBox(height: 35),
+
+                        /// CATEGORY TITLE
+                        Text(
                           isEnglish
-                              ? 'Special Day Promo'
-                              : 'Promo Hari Spesial',
+                              ? 'Treatment Category'
+                              : 'Kategori Treatment',
 
-                          style:
-                              const TextStyle(
-                            color: Colors.white,
-                            fontSize: 28,
+                          style: const TextStyle(
+                            fontSize: 24,
                             fontWeight:
                                 FontWeight.bold,
+
+                            color: Colors.white,
                           ),
                         ),
-                      ),
-                    ),
 
-                    const SizedBox(height: 30),
+                        const SizedBox(height: 20),
 
-                    /// CATEGORY TITLE
-                    Text(
-                      isEnglish
-                          ? 'Treatment Category'
-                          : 'Kategori Treatment',
+                        Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .spaceAround,
 
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight:
-                            FontWeight.bold,
-                      ),
-                    ),
+                          children: [
 
-                    const SizedBox(height: 20),
+                            GestureDetector(
+                              onTap: () {
 
-                    Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment
-                              .spaceAround,
+                                Navigator.push(
+                                  context,
 
-                      children: [
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        TreatmentDetailPage(
+                                      title: isEnglish
+                                          ? 'Facial Treatment'
+                                          : 'Treatment Facial',
+
+                                      description:
+                                          isEnglish
+                                              ? 'Facial treatment to clean and nourish facial skin.'
+                                              : 'Perawatan facial untuk membersihkan dan menyehatkan kulit wajah.',
+                                    ),
+                                  ),
+                                );
+                              },
+
+                              child:
+                                  categoryItem(
+                                Icons.face,
+                                'Facial',
+                              ),
+                            ),
+
+                            GestureDetector(
+                              onTap: () {
+
+                                Navigator.push(
+                                  context,
+
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        TreatmentDetailPage(
+                                      title: isEnglish
+                                          ? 'Therapy Treatment'
+                                          : 'Treatment Therapy',
+
+                                      description:
+                                          isEnglish
+                                              ? 'Therapy treatment helps relaxation and skin health.'
+                                              : 'Therapy treatment membantu relaksasi dan kesehatan kulit.',
+                                    ),
+                                  ),
+                                );
+                              },
+
+                              child:
+                                  categoryItem(
+                                Icons.spa,
+                                'Therapy',
+                              ),
+                            ),
+
+                            GestureDetector(
+                              onTap: () {
+
+                                Navigator.push(
+                                  context,
+
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        TreatmentDetailPage(
+                                      title: isEnglish
+                                          ? 'Glow Treatment'
+                                          : 'Treatment Glow',
+
+                                      description:
+                                          isEnglish
+                                              ? 'Glow treatment helps the face look brighter and glowing.'
+                                              : 'Glow treatment membantu wajah tampak lebih cerah dan glowing.',
+                                    ),
+                                  ),
+                                );
+                              },
+
+                              child:
+                                  categoryItem(
+                                Icons.auto_awesome,
+                                'Glow',
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 35),
+
+                        /// POPULAR TITLE
+                        Text(
+                          isEnglish
+                              ? 'Popular Treatment'
+                              : 'Treatment Populer',
+
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight:
+                                FontWeight.bold,
+
+                            color: Colors.white,
+                          ),
+                        ),
+
+                        const SizedBox(height: 20),
 
                         GestureDetector(
                           onTap: () {
@@ -213,134 +404,34 @@ class HomePage extends StatelessWidget {
                               MaterialPageRoute(
                                 builder: (context) =>
                                     TreatmentDetailPage(
-                                  title: isEnglish
-                                      ? 'Facial Treatment'
-                                      : 'Treatment Facial',
+                                  title:
+                                      'Anti Facial Acne',
 
                                   description:
                                       isEnglish
-                                          ? 'Facial treatment to clean and nourish facial skin.'
-                                          : 'Perawatan facial untuk membersihkan dan menyehatkan kulit wajah.',
+                                          ? 'The best facial treatment to treat acne and maintain healthy skin.'
+                                          : 'Treatment wajah terbaik untuk mengatasi jerawat dan menjaga kesehatan kulit.',
                                 ),
                               ),
                             );
                           },
 
-                          child: categoryItem(
-                            Icons.face,
-                            'Facial',
-                          ),
-                        ),
+                          child: treatmentCard(
+                            title:
+                                'Anti Facial Acne',
 
-                        GestureDetector(
-                          onTap: () {
-
-                            Navigator.push(
-                              context,
-
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    TreatmentDetailPage(
-                                  title: isEnglish
-                                      ? 'Therapy Treatment'
-                                      : 'Treatment Therapy',
-
-                                  description:
-                                      isEnglish
-                                          ? 'Therapy treatment helps relaxation and skin health.'
-                                          : 'Therapy treatment membantu relaksasi dan kesehatan kulit.',
-                                ),
-                              ),
-                            );
-                          },
-
-                          child: categoryItem(
-                            Icons.spa,
-                            'Therapy',
-                          ),
-                        ),
-
-                        GestureDetector(
-                          onTap: () {
-
-                            Navigator.push(
-                              context,
-
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    TreatmentDetailPage(
-                                  title: isEnglish
-                                      ? 'Glow Treatment'
-                                      : 'Treatment Glow',
-
-                                  description:
-                                      isEnglish
-                                          ? 'Glow treatment helps the face look brighter and glowing.'
-                                          : 'Glow treatment membantu wajah tampak lebih cerah dan glowing.',
-                                ),
-                              ),
-                            );
-                          },
-
-                          child: categoryItem(
-                            Icons.auto_awesome,
-                            'Glow',
+                            subtitle:
+                                isEnglish
+                                    ? 'Best facial treatment for healthy skin'
+                                    : 'Treatment wajah terbaik untuk kulit sehat',
                           ),
                         ),
                       ],
                     ),
-
-                    const SizedBox(height: 35),
-
-                    /// POPULAR TITLE
-                    Text(
-                      isEnglish
-                          ? 'Popular Treatment'
-                          : 'Treatment Populer',
-
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight:
-                            FontWeight.bold,
-                      ),
-                    ),
-
-                    const SizedBox(height: 20),
-
-                    GestureDetector(
-                      onTap: () {
-
-                        Navigator.push(
-                          context,
-
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                TreatmentDetailPage(
-                              title:
-                                  'Anti Facial Acne',
-
-                              description:
-                                  isEnglish
-                                      ? 'The best facial treatment to treat acne and maintain healthy skin.'
-                                      : 'Treatment wajah terbaik untuk mengatasi jerawat dan menjaga kesehatan kulit.',
-                            ),
-                          ),
-                        );
-                      },
-
-                      child: treatmentCard(
-                        title:
-                            'Anti Facial Acne',
-
-                        subtitle: isEnglish
-                            ? 'Best facial treatment for healthy skin'
-                            : 'Treatment wajah terbaik untuk kulit sehat',
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
         );
       },
@@ -360,8 +451,10 @@ class HomePage extends StatelessWidget {
               const EdgeInsets.all(18),
 
           decoration:
-              const BoxDecoration(
-            color: Color(0xFFF5F0E1),
+              BoxDecoration(
+            color: Colors.white
+                .withOpacity(0.85),
+
             shape: BoxShape.circle,
           ),
 
@@ -369,13 +462,21 @@ class HomePage extends StatelessWidget {
             icon,
             color:
                 const Color(0xFFB89B3C),
+
             size: 30,
           ),
         ),
 
         const SizedBox(height: 10),
 
-        Text(title),
+        Text(
+          title,
+
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ],
     );
   }
@@ -390,7 +491,9 @@ class HomePage extends StatelessWidget {
           const EdgeInsets.all(15),
 
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color:
+            Colors.white.withOpacity(
+                0.85),
 
         borderRadius:
             BorderRadius.circular(20),
@@ -436,6 +539,7 @@ class HomePage extends StatelessWidget {
                       const TextStyle(
                     fontWeight:
                         FontWeight.bold,
+
                     fontSize: 18,
                   ),
                 ),
@@ -447,7 +551,7 @@ class HomePage extends StatelessWidget {
 
                   style: TextStyle(
                     color:
-                        Colors.grey.shade600,
+                        Colors.grey.shade700,
                   ),
                 ),
               ],
