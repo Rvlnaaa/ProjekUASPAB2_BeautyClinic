@@ -1,16 +1,36 @@
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
-import '../treatment/treatment_detail_page.dart';
 import 'search_page.dart';
 import 'notification_page.dart';
+import '../../main.dart';
+import '../../models/dummy_treatment.dart';
+import 'treatment_detail_page.dart';
+import '../../models/dummy_clinic.dart';
+import 'search_page.dart';
+import 'notification_page.dart';
+import 'clinic_detail_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<HomePage> createState() =>
+      _HomePageState();
+}
 
+class _HomePageState
+    extends State<HomePage> {
+
+  int _currentIndex = 0;
+
+  final PageController _pageController =
+      PageController(
+    viewportFraction: 0.7,
+  );
+
+  @override
+  Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: isEnglishNotifier,
 
@@ -40,7 +60,7 @@ class HomePage extends StatelessWidget {
 
       /// OVERLAY SAMA KAYAK LOGIN & REGISTER
       Container(
-        color: Colors.white.withOpacity(
+        color: Colors.black.withOpacity(
             0.35),
       ),
 
@@ -88,37 +108,31 @@ class HomePage extends StatelessWidget {
 
                         const SizedBox(height: 10),
 
-                        /// TITLE
-                        Center(
+                       /// TITLE
+Center(
   child: Column(
     children: [
 
-      Text(
-        isEnglish
-            ? 'Beauty Clinic'
-            : 'Klinik Kecantikan',
+      const Text(
+        'BeautyLink Palembang',
 
         textAlign: TextAlign.center,
 
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 34,
-          fontWeight:
-              FontWeight.bold,
-
+          fontWeight: FontWeight.bold,
           color: Colors.white,
         ),
       ),
 
       const SizedBox(height: 8),
 
-      Text(
-        isEnglish
-            ? 'Welcome and stay beautiful ✨'
-            : 'Selamat datang dan tetap cantik ✨',
+      const Text(
+        'Temukan Klinik Kecantikan Terbaik di Palembang',
 
         textAlign: TextAlign.center,
 
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 16,
           color: Colors.white70,
         ),
@@ -127,7 +141,90 @@ class HomePage extends StatelessWidget {
   ),
 ),
 
-const SizedBox(height: 30),
+const SizedBox(height: 25),
+
+/// CLINIC SLIDER
+/// CLINIC SLIDER
+SizedBox(
+  height: 300,
+
+  child: PageView.builder(
+    controller: _pageController,
+
+    itemCount: 4,
+
+    onPageChanged: (index) {
+
+      setState(() {
+        _currentIndex = index;
+      });
+    },
+
+    itemBuilder: (
+      context,
+      index,
+    ) {
+
+      final images = [
+
+        'assets/klinik1.jpg',
+        'assets/klinik2.jpg',
+        'assets/klinik.jpg',
+        'assets/klinik4.jpg',
+      ];
+
+      return Padding(
+        padding:
+            const EdgeInsets.symmetric(
+          horizontal: 4,
+        ),
+
+        child: ClipRRect(
+          borderRadius:
+              BorderRadius.circular(20),
+
+          child: Image.asset(
+            images[index],
+
+            fit: BoxFit.cover,
+          ),
+        ),
+      );
+    },
+  ),
+),
+
+const SizedBox(height: 10),
+
+/// DOT INDICATOR
+Row(
+  mainAxisAlignment:
+      MainAxisAlignment.center,
+
+  children: List.generate(
+    4,
+
+    (index) => Container(
+      width: 8,
+      height: 8,
+
+      margin:
+          const EdgeInsets.symmetric(
+        horizontal: 4,
+      ),
+
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+
+        color: _currentIndex == index
+            ? Colors.white
+            : Colors.white38,
+      ),
+    ),
+  ),
+),
+
+const SizedBox(height: 25),
 
                         /// SEARCH BAR
                         GestureDetector(
@@ -193,75 +290,7 @@ const SizedBox(height: 30),
 
                         const SizedBox(height: 30),
 
-                        /// PROMO CARD
-                        Container(
-                          height: 170,
-                          width: double.infinity,
 
-                          decoration:
-                              BoxDecoration(
-                            gradient:
-                                const LinearGradient(
-                              colors: [
-                                Color(0xFFD4AF37),
-                                Color(0xFFB8860B),
-                              ],
-                            ),
-
-                            borderRadius:
-                                BorderRadius.circular(
-                              25,
-                            ),
-                          ),
-
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment:
-                                  MainAxisAlignment
-                                      .center,
-
-                              children: [
-
-                                Text(
-                                  isEnglish
-                                      ? 'Special Day Promo'
-                                      : 'Promo Hari Spesial',
-
-                                  style:
-                                      const TextStyle(
-                                    color:
-                                        Colors.white,
-
-                                    fontSize: 28,
-
-                                    fontWeight:
-                                        FontWeight
-                                            .bold,
-                                  ),
-                                ),
-
-                                const SizedBox(
-                                    height: 10),
-
-                                const Text(
-                                  '50% OFF',
-                                  style: TextStyle(
-                                    color:
-                                        Colors.white,
-
-                                    fontSize: 36,
-
-                                    fontWeight:
-                                        FontWeight
-                                            .bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-
-                        const SizedBox(height: 35),
 
                         /// CATEGORY TITLE
                         Text(
@@ -295,16 +324,10 @@ const SizedBox(height: 30),
 
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        TreatmentDetailPage(
-                                      title: isEnglish
-                                          ? 'Facial Treatment'
-                                          : 'Treatment Facial',
-
-                                      description:
-                                          isEnglish
-                                              ? 'Facial treatment to clean and nourish facial skin.'
-                                              : 'Perawatan facial untuk membersihkan dan menyehatkan kulit wajah.',
-                                    ),
+    TreatmentDetailPage(
+  treatment:
+      dummyTreatment[0],
+),
                                   ),
                                 );
                               },
@@ -324,16 +347,10 @@ const SizedBox(height: 30),
 
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        TreatmentDetailPage(
-                                      title: isEnglish
-                                          ? 'Therapy Treatment'
-                                          : 'Treatment Therapy',
-
-                                      description:
-                                          isEnglish
-                                              ? 'Therapy treatment helps relaxation and skin health.'
-                                              : 'Therapy treatment membantu relaksasi dan kesehatan kulit.',
-                                    ),
+    TreatmentDetailPage(
+  treatment:
+      dummyTreatment[1],
+),
                                   ),
                                 );
                               },
@@ -352,17 +369,11 @@ const SizedBox(height: 30),
                                   context,
 
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        TreatmentDetailPage(
-                                      title: isEnglish
-                                          ? 'Glow Treatment'
-                                          : 'Treatment Glow',
-
-                                      description:
-                                          isEnglish
-                                              ? 'Glow treatment helps the face look brighter and glowing.'
-                                              : 'Glow treatment membantu wajah tampak lebih cerah dan glowing.',
-                                    ),
+                                   builder: (context) =>
+    TreatmentDetailPage(
+  treatment:
+      dummyTreatment[2],
+),
                                   ),
                                 );
                               },
@@ -378,54 +389,127 @@ const SizedBox(height: 30),
 
                         const SizedBox(height: 35),
 
-                        /// POPULAR TITLE
-                        Text(
-                          isEnglish
-                              ? 'Popular Treatment'
-                              : 'Treatment Populer',
+/// POPULAR CLINICS
+Text(
+  isEnglish
+      ? 'Popular Clinics'
+      : 'Klinik Populer',
 
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight:
-                                FontWeight.bold,
+  style: const TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  ),
+),
 
-                            color: Colors.white,
-                          ),
-                        ),
+const SizedBox(height: 20),
 
-                        const SizedBox(height: 20),
+GridView.builder(
+  shrinkWrap: true,
 
-                        GestureDetector(
-                          onTap: () {
+  physics:
+      const NeverScrollableScrollPhysics(),
 
-                            Navigator.push(
-                              context,
+  gridDelegate:
+      const SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 2,
+    crossAxisSpacing: 12,
+    mainAxisSpacing: 16,
+    childAspectRatio: 0.75,
+  ),
 
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    TreatmentDetailPage(
-                                  title:
-                                      'Anti Facial Acne',
+  itemCount: dummyClinic.length,
 
-                                  description:
-                                      isEnglish
-                                          ? 'The best facial treatment to treat acne and maintain healthy skin.'
-                                          : 'Treatment wajah terbaik untuk mengatasi jerawat dan menjaga kesehatan kulit.',
-                                ),
-                              ),
-                            );
-                          },
+  itemBuilder: (
+    context,
+    index,
+  ) {
 
-                          child: treatmentCard(
-                            title:
-                                'Anti Facial Acne',
+    final clinic =
+        dummyClinic[index];
 
-                            subtitle:
-                                isEnglish
-                                    ? 'Best facial treatment for healthy skin'
-                                    : 'Treatment wajah terbaik untuk kulit sehat',
-                          ),
-                        ),
+    return GestureDetector(
+   onTap: () {
+
+  Navigator.push(
+    context,
+
+    MaterialPageRoute(
+      builder: (_) =>
+          ClinicDetailPage(
+        clinic: clinic,
+      ),
+    ),
+  );
+},
+
+      child: Column(
+        crossAxisAlignment:
+            CrossAxisAlignment.stretch,
+
+        children: [
+
+          Expanded(
+            child: ClipRRect(
+              borderRadius:
+                  BorderRadius.circular(
+                15,
+              ),
+
+              child: Image.asset(
+                clinic.image,
+
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+
+          const SizedBox(
+            height: 8,
+          ),
+
+          Text(
+            clinic.name,
+
+            maxLines: 1,
+
+            overflow:
+                TextOverflow
+                    .ellipsis,
+
+            textAlign:
+                TextAlign.center,
+
+            style:
+                const TextStyle(
+              color: Colors.white,
+              fontWeight:
+                  FontWeight.bold,
+            ),
+          ),
+
+          const SizedBox(
+            height: 4,
+          ),
+
+         clinic.rating == 0
+    ? const Text(
+        'Belum ada ulasan',
+        style: TextStyle(
+          color: Color.fromARGB(255, 233, 228, 228),
+          fontSize: 12,
+        ),
+      )
+    : Text(
+        '⭐ ${clinic.rating}',
+      ),
+        ],
+      ),
+    );
+  },
+),
+
+const SizedBox(height: 30),
                       ],
                     ),
                   ),
@@ -437,6 +521,8 @@ const SizedBox(height: 30),
       },
     );
   }
+
+
 
   Widget categoryItem(
     IconData icon,
@@ -561,4 +647,26 @@ const SizedBox(height: 30),
       ),
     );
   }
+
+  Widget clinicBanner(
+  String image,
+) {
+
+  return Container(
+    margin:
+        const EdgeInsets.symmetric(
+      horizontal: 5,
+    ),
+
+    decoration: BoxDecoration(
+      borderRadius:
+          BorderRadius.circular(25),
+
+      image: DecorationImage(
+        image: AssetImage(image),
+        fit: BoxFit.cover,
+      ),
+    ),
+  );
+}
 }
