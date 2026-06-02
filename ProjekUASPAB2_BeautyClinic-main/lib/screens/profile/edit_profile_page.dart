@@ -1,23 +1,39 @@
 import 'package:flutter/material.dart';
+import '../auth/login_page.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
 
   @override
-  State<EditProfilePage> createState() => _EditProfilePageState();
+  State<EditProfilePage> createState() =>
+      _EditProfilePageState();
 }
 
-class _EditProfilePageState extends State<EditProfilePage> {
+class _EditProfilePageState
+    extends State<EditProfilePage> {
 
-  final TextEditingController nameController =
-      TextEditingController(
-    text: 'Leonica User',
-  );
+  late TextEditingController nameController;
+  late TextEditingController emailController;
 
-  final TextEditingController emailController =
-      TextEditingController(
-    text: 'user@gmail.com',
-  );
+  @override
+  void initState() {
+    super.initState();
+
+    nameController = TextEditingController(
+      text: LoginPage.userName,
+    );
+
+    emailController = TextEditingController(
+      text: LoginPage.userEmail,
+    );
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +71,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 labelText: 'Nama',
 
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius:
+                      BorderRadius.circular(15),
                 ),
               ),
             ),
@@ -69,7 +86,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 labelText: 'Email',
 
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius:
+                      BorderRadius.circular(15),
                 ),
               ),
             ),
@@ -83,20 +101,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
               child: ElevatedButton(
                 onPressed: () {
 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Profile berhasil diperbarui',
-                      ),
-                    ),
-                  );
+                  LoginPage.userName =
+                      nameController.text;
+
+                  LoginPage.userEmail =
+                      emailController.text;
+
+                  Navigator.pop(context);
                 },
 
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.amber,
+                  backgroundColor:
+                      Colors.amber,
 
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                  shape:
+                      RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(
+                      15,
+                    ),
                   ),
                 ),
 
