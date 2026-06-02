@@ -7,7 +7,7 @@ import '../screens/news/news_page.dart';
 import '../screens/profile/profile_page.dart';
 
 class BottomNavbar extends StatefulWidget {
-  BottomNavbar({super.key});
+  const BottomNavbar({super.key});
 
   @override
   State<BottomNavbar> createState() =>
@@ -29,12 +29,12 @@ class _BottomNavbarState
   @override
   Widget build(BuildContext context) {
 
-    return ValueListenableBuilder(
-      valueListenable: isEnglishNotifier,
+    return ValueListenableBuilder<String>(
+      valueListenable: languageNotifier,
 
       builder: (
         context,
-        bool isEnglish,
+        String language,
         child,
       ) {
 
@@ -59,48 +59,52 @@ class _BottomNavbarState
                 Colors.grey,
 
             type:
-                BottomNavigationBarType
-                    .fixed,
+                BottomNavigationBarType.fixed,
 
             items: [
 
               BottomNavigationBarItem(
-                icon:
-                    const Icon(Icons.home),
+                icon: const Icon(Icons.home),
 
-                label: isEnglish
-                    ? 'Home'
-                    : 'Beranda',
+                label:
+                    language == 'id'
+                        ? 'Beranda'
+                        : language == 'en'
+                            ? 'Home'
+                            : 'ホーム',
               ),
 
               BottomNavigationBarItem(
-                icon: const Icon(
-                  Icons.favorite,
-                ),
+                icon: const Icon(Icons.favorite),
 
-                label: isEnglish
-                    ? 'Favorite'
-                    : 'Favorit',
+                label:
+                    language == 'id'
+                        ? 'Favorit'
+                        : language == 'en'
+                            ? 'Favorite'
+                            : 'お気に入り',
               ),
 
               BottomNavigationBarItem(
-                icon: const Icon(
-                  Icons.article,
-                ),
+                icon: const Icon(Icons.article),
 
-                label: isEnglish
-                    ? 'News'
-                    : 'Berita',
+                label:
+                    language == 'id'
+                        ? 'Berita'
+                        : language == 'en'
+                            ? 'News'
+                            : 'ニュース',
               ),
 
               BottomNavigationBarItem(
-                icon: const Icon(
-                  Icons.person,
-                ),
+                icon: const Icon(Icons.person),
 
-                label: isEnglish
-                    ? 'Profile'
-                    : 'Profil',
+                label:
+                    language == 'id'
+                        ? 'Profil'
+                        : language == 'en'
+                            ? 'Profile'
+                            : 'プロフィール',
               ),
             ],
           ),

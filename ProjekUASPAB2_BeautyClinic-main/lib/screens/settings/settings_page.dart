@@ -14,129 +14,158 @@ class _SettingsPageState
 
   bool isDarkMode = false;
 
-  String selectedLanguage =
-      'Indonesia';
+  String selectedLanguage = 'id';
 
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          isEnglishNotifier.value
-              ? 'Settings'
-              : 'Pengaturan',
-        ),
-      ),
+    return ValueListenableBuilder<String>(
+      valueListenable: languageNotifier,
 
-      body: ListView(
-        padding: const EdgeInsets.all(20),
+      builder: (
+        context,
+        String language,
+        child,
+      ) {
 
-        children: [
-
-          Container(
-            padding: const EdgeInsets.all(15),
-
-            margin: const EdgeInsets.only(
-              bottom: 20,
-            ),
-
-            decoration: BoxDecoration(
-              color:
-                  Theme.of(context).cardColor,
-
-              borderRadius:
-                  BorderRadius.circular(20),
-            ),
-
-            child: SwitchListTile(
-              value: isDarkMode,
-
-              onChanged: (value) {
-
-                setState(() {
-                  isDarkMode = value;
-                });
-
-                themeNotifier.value =
-                    value
-                        ? ThemeMode.dark
-                        : ThemeMode.light;
-              },
-
-              secondary:
-                  const Icon(Icons.dark_mode),
-
-              title: Text(
-                isEnglishNotifier.value
-                    ? 'Dark Mode'
-                    : 'Mode Gelap',
-              ),
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              language == 'id'
+                  ? 'Pengaturan'
+                  : language == 'en'
+                      ? 'Settings'
+                      : '設定',
             ),
           ),
 
-          Container(
-            padding: const EdgeInsets.all(15),
+          body: ListView(
+            padding: const EdgeInsets.all(20),
 
-            decoration: BoxDecoration(
-              color:
-                  Theme.of(context).cardColor,
+            children: [
 
-              borderRadius:
-                  BorderRadius.circular(20),
-            ),
+              Container(
+                padding: const EdgeInsets.all(15),
 
-            child: ListTile(
-              leading:
-                  const Icon(Icons.language),
+                margin: const EdgeInsets.only(
+                  bottom: 20,
+                ),
 
-              title: Text(
-                isEnglishNotifier.value
-                    ? 'Language'
-                    : 'Bahasa',
+                decoration: BoxDecoration(
+                  color:
+                      Theme.of(context).cardColor,
+
+                  borderRadius:
+                      BorderRadius.circular(20),
+                ),
+
+                child: SwitchListTile(
+                  value: isDarkMode,
+
+                  onChanged: (value) {
+
+                    setState(() {
+                      isDarkMode = value;
+                    });
+
+                    themeNotifier.value =
+                        value
+                            ? ThemeMode.dark
+                            : ThemeMode.light;
+                  },
+
+                  secondary:
+                      const Icon(Icons.dark_mode),
+
+                  title: Text(
+                    language == 'id'
+                        ? 'Mode Gelap'
+                        : language == 'en'
+                            ? 'Dark Mode'
+                            : 'ダークモード',
+                  ),
+                ),
               ),
 
-              subtitle:
-                  Text(selectedLanguage),
+              Container(
+                padding: const EdgeInsets.all(15),
 
-              trailing: DropdownButton<String>(
-                value: selectedLanguage,
+                decoration: BoxDecoration(
+                  color:
+                      Theme.of(context).cardColor,
 
-                underline:
-                    const SizedBox(),
+                  borderRadius:
+                      BorderRadius.circular(20),
+                ),
 
-                items: const [
+                child: ListTile(
+                  leading:
+                      const Icon(Icons.language),
 
-                  DropdownMenuItem(
-                    value: 'Indonesia',
-                    child: Text(
-                      'Indonesia',
-                    ),
+                  title: Text(
+                    language == 'id'
+                        ? 'Bahasa'
+                        : language == 'en'
+                            ? 'Language'
+                            : '言語',
                   ),
 
-                  DropdownMenuItem(
-                    value: 'English',
-                    child: Text(
-                      'English',
-                    ),
+                  subtitle: Text(
+                    selectedLanguage == 'id'
+                        ? 'Indonesia'
+                        : selectedLanguage == 'en'
+                            ? 'English'
+                            : '日本語',
                   ),
-                ],
 
-                onChanged: (value) {
+                  trailing:
+                      DropdownButton<String>(
+                    value: selectedLanguage,
 
-                  setState(() {
-                    selectedLanguage =
-                        value!;
-                  });
+                    underline:
+                        const SizedBox(),
 
-                  isEnglishNotifier.value =
-                      value == 'English';
-                },
+                    items: const [
+
+                      DropdownMenuItem(
+                        value: 'id',
+                        child: Text(
+                          'Indonesia',
+                        ),
+                      ),
+
+                      DropdownMenuItem(
+                        value: 'en',
+                        child: Text(
+                          'English',
+                        ),
+                      ),
+
+                      DropdownMenuItem(
+                        value: 'jp',
+                        child: Text(
+                          '日本語',
+                        ),
+                      ),
+                    ],
+
+                    onChanged: (value) {
+
+                      setState(() {
+                        selectedLanguage =
+                            value!;
+                      });
+
+                      languageNotifier.value =
+                          value!;
+                    },
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

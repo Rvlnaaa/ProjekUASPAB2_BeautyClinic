@@ -23,43 +23,102 @@ class _ProfilePageState
 
   File? profileImage;
 
-  Future<void> pickImage() async {
+  Future<void> pickImage(
+  ImageSource source,
+) async {
 
-    final pickedImage =
-        await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-    );
+  final pickedImage =
+      await ImagePicker().pickImage(
+    source: source,
+  );
 
-    if (pickedImage != null) {
+  if (pickedImage != null) {
 
-      setState(() {
-        profileImage = File(
-          pickedImage.path,
-        );
-      });
-    }
+    setState(() {
+      profileImage = File(
+        pickedImage.path,
+      );
+    });
   }
+}
 
+void showImagePicker() {
+
+  showModalBottomSheet(
+    context: context,
+
+    builder: (context) {
+
+      return SafeArea(
+        child: Wrap(
+          children: [
+
+            ListTile(
+              leading: const Icon(
+                Icons.camera_alt,
+              ),
+
+              title: const Text(
+                'Ambil dari Kamera',
+              ),
+
+              onTap: () {
+
+                Navigator.pop(context);
+
+                pickImage(
+                  ImageSource.camera,
+                );
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(
+                Icons.photo_library,
+              ),
+
+              title: const Text(
+                'Pilih dari Galeri',
+              ),
+
+              onTap: () {
+
+                Navigator.pop(context);
+
+                pickImage(
+                  ImageSource.gallery,
+                );
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
   @override
   Widget build(BuildContext context) {
 
-    return ValueListenableBuilder(
-      valueListenable: isEnglishNotifier,
+   return ValueListenableBuilder<String>(
+  valueListenable: languageNotifier,
 
-      builder: (
-        context,
-        bool isEnglish,
-        child,
-      ) {
+  builder: (
+    context,
+    String language,
+    child,
+  ) {
 
-        return Scaffold(
+  return Scaffold(
+
           appBar: AppBar(
-            title: Text(
-              isEnglish
-                  ? 'Profile'
-                  : 'Profil',
-            ),
-          ),
+  title: Text(
+    language == 'id'
+        ? 'Profil'
+        : language == 'en'
+            ? 'Profile'
+            : 'プロフィール',
+  ),
+),
 
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(20),
@@ -70,7 +129,7 @@ class _ProfilePageState
                 const SizedBox(height: 20),
 
                 GestureDetector(
-                  onTap: pickImage,
+                  onTap: showImagePicker,
 
                   child: CircleAvatar(
                     radius: 55,
@@ -134,9 +193,11 @@ class _ProfilePageState
                 profileMenu(
                   icon: Icons.edit,
 
-                  title: isEnglish
-                      ? 'Edit Profile'
-                      : 'Edit Profil',
+                  title: language == 'id'
+    ? 'Edit Profil'
+    : language == 'en'
+        ? 'Edit Profile'
+        : 'プロフィール編集',
 
                   onTap: () {
 
@@ -157,9 +218,11 @@ class _ProfilePageState
                 profileMenu(
                   icon: Icons.history,
 
-                  title: isEnglish
-                      ? 'Treatment History'
-                      : 'Riwayat Treatment',
+                  title: language == 'id'
+    ? 'Riwayat Treatment'
+    : language == 'en'
+        ? 'Treatment History'
+        : '施術履歴',
 
                   onTap: () {
 
@@ -178,9 +241,11 @@ class _ProfilePageState
                 profileMenu(
                   icon: Icons.favorite,
 
-                  title: isEnglish
-                      ? 'Favorite Treatment'
-                      : 'Treatment Favorit',
+                  title: language == 'id'
+    ? 'Treatment Favorit'
+    : language == 'en'
+        ? 'Favorite Treatment'
+        : 'お気に入り施術',
 
                   onTap: () {
 
@@ -199,9 +264,11 @@ class _ProfilePageState
                 profileMenu(
                   icon: Icons.settings,
 
-                  title: isEnglish
-                      ? 'Settings'
-                      : 'Pengaturan',
+              title: language == 'id'
+    ? 'Pengaturan'
+    : language == 'en'
+        ? 'Settings'
+        : '設定',
 
                   onTap: () {
 
@@ -221,9 +288,11 @@ class _ProfilePageState
                   icon: Icons.logout,
                   color: Colors.red,
 
-                  title: isEnglish
-                      ? 'Logout'
-                      : 'Keluar',
+                  title: language == 'id'
+    ? 'Keluar'
+    : language == 'en'
+        ? 'Logout'
+        : 'ログアウト',
 
                   onTap: () {
 
@@ -300,4 +369,4 @@ class _ProfilePageState
       ),
     );
   }
-}
+    }

@@ -31,14 +31,14 @@ class _HomePageState
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: isEnglishNotifier,
+   return ValueListenableBuilder<String>(
+  valueListenable: languageNotifier,
 
-      builder: (
-        context,
-        bool isEnglish,
-        child,
-      ) {
+  builder: (
+    context,
+    String language,
+    child,
+  ) {
 
         return Scaffold(
 
@@ -272,9 +272,11 @@ const SizedBox(height: 25),
                                 ),
 
                                 Text(
-                                  isEnglish
-                                      ? 'Search'
-                                      : 'Cari',
+                                  language == 'id'
+    ? 'Cari'
+    : language == 'en'
+        ? 'Search'
+        : '検索',
 
                                   style:
                                       const TextStyle(
@@ -294,9 +296,11 @@ const SizedBox(height: 25),
 
                         /// CATEGORY TITLE
                         Text(
-                          isEnglish
-                              ? 'Treatment Category'
-                              : 'Kategori Treatment',
+                       language == 'id'
+    ? 'Kategori Treatment'
+    : language == 'en'
+        ? 'Treatment Category'
+        : '施術カテゴリー',
 
                           style: const TextStyle(
                             fontSize: 24,
@@ -391,9 +395,11 @@ const SizedBox(height: 25),
 
 /// POPULAR CLINICS
 Text(
-  isEnglish
-      ? 'Popular Clinics'
-      : 'Klinik Populer',
+language == 'id'
+    ? 'Klinik Populer'
+    : language == 'en'
+        ? 'Popular Clinics'
+        : '人気クリニック',
 
   style: const TextStyle(
     fontSize: 24,

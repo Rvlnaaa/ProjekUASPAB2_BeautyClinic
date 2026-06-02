@@ -5,8 +5,8 @@ import 'screens/splash/splash_page.dart';
 ValueNotifier<ThemeMode> themeNotifier =
     ValueNotifier(ThemeMode.light);
 
-ValueNotifier<bool> isEnglishNotifier =
-    ValueNotifier(false);
+ValueNotifier<String> languageNotifier =
+    ValueNotifier("id");
 
 void main() {
   runApp(const MyApp());

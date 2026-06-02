@@ -169,15 +169,15 @@ Future<void> register() async {
   @override
   Widget build(BuildContext context) {
 
-    return ValueListenableBuilder(
-      valueListenable:
-      isEnglishNotifier,
+    return ValueListenableBuilder<String>(
+  valueListenable: languageNotifier,
 
-      builder: (
-          context,
-          bool isEnglish,
-          child,
-          ) {
+     builder: (
+  context,
+  String language,
+  child,
+)
+          {
 
         return Scaffold(
 
@@ -222,9 +222,11 @@ Future<void> register() async {
                       /// TITLE
                       /// TITLE
 Text(
-  isEnglish
-      ? 'REGISTER'
-      : 'DAFTAR',
+  language == 'id'
+    ? 'DAFTAR'
+    : language == 'en'
+        ? 'REGISTER'
+        : '登録',
 
   textAlign: TextAlign.center,
 
@@ -239,9 +241,11 @@ Text(
 const SizedBox(height: 10),
 
 Text(
-  isEnglish
-      ? 'Create Your Account'
-      : 'Buat Akun Anda',
+  language == 'id'
+    ? 'Buat Akun Anda'
+    : language == 'en'
+        ? 'Create Your Account'
+        : 'アカウントを作成',
 
   textAlign: TextAlign.center,
 
@@ -255,9 +259,11 @@ Text(
 const SizedBox(height: 5),
 
 Text(
-  isEnglish
-      ? 'Register first to continue'
-      : 'Silahkan daftar terlebih dahulu',
+  language == 'id'
+      ? 'Silahkan daftar terlebih dahulu'
+      : language == 'en'
+          ? 'Register first to continue'
+          : 'まず登録してください',
 
   textAlign: TextAlign.center,
 
@@ -294,9 +300,11 @@ const SizedBox(height: 50),
                           usernameController,
 
                           hintText:
-                          isEnglish
-                              ? 'Enter Username'
-                              : 'Masukkan Username',
+                          language == 'id'
+    ? 'Masukkan Username'
+    : language == 'en'
+        ? 'Enter Username'
+        : 'ユーザー名を入力',
                         ),
                       ),
 
@@ -325,9 +333,11 @@ const SizedBox(height: 50),
                           emailController,
 
                           hintText:
-                          isEnglish
-                              ? 'Enter Email'
-                              : 'Masukkan Email',
+    language == 'id'
+        ? 'Masukkan Email'
+        : language == 'en'
+            ? 'Enter Email'
+            : 'メールを入力',
                         ),
                       ),
 
@@ -356,9 +366,11 @@ const SizedBox(height: 50),
                           passwordController,
 
                           hintText:
-                          isEnglish
-                              ? 'Enter Password'
-                              : 'Masukkan Password',
+    language == 'id'
+        ? 'Masukkan Password'
+        : language == 'en'
+            ? 'Enter Password'
+            : 'パスワードを入力',
 
                           obscureText:
                           true,
@@ -375,9 +387,11 @@ const SizedBox(height: 50),
 
                         child:
                         CustomButton(
-                          text: isEnglish
-                              ? 'REGISTER'
-                              : 'DAFTAR',
+                          text: language == 'id'
+    ? 'DAFTAR'
+    : language == 'en'
+        ? 'REGISTER'
+        : '登録',
 
                           onPressed:
                           register,
@@ -397,9 +411,11 @@ const SizedBox(height: 50),
                         children: [
 
                           Text(
-                            isEnglish
-                                ? 'Already have an account?'
-                                : 'Sudah memiliki akun?',
+                            language == 'id'
+    ? 'Sudah memiliki akun?'
+    : language == 'en'
+        ? 'Already have an account?'
+        : 'すでにアカウントをお持ちですか？',
 
                             style:
                             const TextStyle(
@@ -417,9 +433,11 @@ const SizedBox(height: 50),
                             },
 
                             child: Text(
-                              isEnglish
-                                  ? 'Login'
-                                  : 'Masuk',
+                              language == 'id'
+    ? 'Masuk'
+    : language == 'en'
+        ? 'Login'
+        : 'ログイン',
 
                               style:
                               TextStyle(

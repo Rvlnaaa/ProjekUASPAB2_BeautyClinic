@@ -185,15 +185,14 @@ if (inputPassword.trim() !=
   @override
   Widget build(BuildContext context) {
 
-    return ValueListenableBuilder(
-      valueListenable:
-          isEnglishNotifier,
+    return ValueListenableBuilder<String>(
+  valueListenable: languageNotifier,
 
-      builder: (
-        context,
-        bool isEnglish,
-        child,
-      ) {
+  builder: (
+    context,
+    String language,
+    child,
+  ) {
 
         return Scaffold(
 
@@ -237,9 +236,11 @@ if (inputPassword.trim() !=
 
                       /// TITLE
                      Text(
-  isEnglish
-      ? 'LOGIN'
-      : 'MASUK',
+  language == 'id'
+    ? 'MASUK'
+    : language == 'en'
+        ? 'LOGIN'
+        : 'ログイン',
 
   style: const TextStyle(
     fontSize: 42,
@@ -252,9 +253,11 @@ if (inputPassword.trim() !=
 const SizedBox(height: 10),
 
 Text(
-  isEnglish
-      ? 'Welcome Back!'
-      : 'Selamat Datang!',
+  language == 'id'
+    ? 'Selamat Datang!'
+    : language == 'en'
+        ? 'Welcome Back!'
+        : 'おかえりなさい！',
 
   textAlign: TextAlign.center,
 
@@ -268,9 +271,11 @@ Text(
 const SizedBox(height: 5),
 
 Text(
-  isEnglish
-      ? 'Please login to continue'
-      : 'Silahkan login untuk melanjutkan',
+  language == 'id'
+      ? 'Silahkan login untuk melanjutkan'
+      : language == 'en'
+          ? 'Please login to continue'
+          : 'ログインしてください',
 
   textAlign: TextAlign.center,
 
@@ -302,9 +307,11 @@ Text(
                         child:
                             CustomTextField(
                           hintText:
-                              isEnglish
-                                  ? 'Enter Email'
-                                  : 'Masukkan Email',
+                              language == 'id'
+    ? 'Masukkan Email'
+    : language == 'en'
+        ? 'Enter Email'
+        : 'メールを入力',
 
                           controller:
                               emailController,
@@ -333,9 +340,11 @@ Text(
                         child:
                             CustomTextField(
                           hintText:
-                              isEnglish
-                                  ? 'Enter Password'
-                                  : 'Masukkan Password',
+                              language == 'id'
+    ? 'Masukkan Password'
+    : language == 'en'
+        ? 'Enter Password'
+        : 'パスワードを入力',
 
                           obscureText:
                               true,
@@ -355,9 +364,11 @@ Text(
 
                         child:
                             CustomButton(
-                          text: isEnglish
-                              ? 'LOGIN'
-                              : 'MASUK',
+                          text: language == 'id'
+    ? 'MASUK'
+    : language == 'en'
+        ? 'LOGIN'
+        : 'ログイン',
 
                           onPressed:
                               login,
@@ -377,9 +388,11 @@ Text(
                         children: [
 
                           Text(
-                            isEnglish
-                                ? 'Don\'t have an account?'
-                                : 'Belum memiliki akun?',
+                            language == 'id'
+    ? 'Belum memiliki akun?'
+    : language == 'en'
+        ? 'Don\'t have an account?'
+        : 'アカウントをお持ちではありませんか？',
 
                             style:
                                 const TextStyle(
@@ -404,9 +417,11 @@ Text(
                             },
 
                             child: Text(
-                              isEnglish
-                                  ? 'Register'
-                                  : 'Daftar',
+                              language == 'id'
+    ? 'Daftar'
+    : language == 'en'
+        ? 'Register'
+        : '登録',
 
                               style:
                                   TextStyle(
