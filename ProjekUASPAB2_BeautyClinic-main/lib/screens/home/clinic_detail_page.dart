@@ -280,18 +280,22 @@ ElevatedButton.icon(
 
       builder: (context) {
 
-        return AlertDialog(
-          title: const Text(
-            'Tambah Ulasan',
-          ),
+       return AlertDialog(
+  title: const Text(
+    'Tambah Ulasan',
+  ),
 
-       content: StatefulBuilder(
-  builder: (
-    context,
-    dialogSetState,
-  ) {
+  content: StatefulBuilder(
+    builder: (
+      context,
+      dialogSetState,
+    ) {
 
-    return Column(
+    return SingleChildScrollView(
+  child: SizedBox(
+    width: 280,
+
+    child: Column(
       mainAxisSize:
           MainAxisSize.min,
 
@@ -305,14 +309,14 @@ ElevatedButton.icon(
           height: 10,
         ),
 
-        Row(
-          mainAxisAlignment:
-              MainAxisAlignment
-                  .center,
+    Wrap(
+  alignment: WrapAlignment.center,
+  spacing: 10,
+  runSpacing: 10,
 
-          children:
-              List.generate(
-            5,
+  children:
+      List.generate(
+    5,
             (index) {
 
               return IconButton(
@@ -347,42 +351,29 @@ ElevatedButton.icon(
   height: 10,
 ),
 
-Row(
-  mainAxisAlignment:
-      MainAxisAlignment.center,
+Wrap(
+  alignment: WrapAlignment.center,
+  spacing: 10,
+  runSpacing: 10,
 
   children: [
 
     ElevatedButton.icon(
-      onPressed:
-          pickFromCamera,
-
-      icon:
-          const Icon(
+      onPressed: pickFromCamera,
+      icon: const Icon(
         Icons.camera_alt,
       ),
-
-      label:
-          const Text(
+      label: const Text(
         'Kamera',
       ),
     ),
 
-    const SizedBox(
-      width: 10,
-    ),
-
     ElevatedButton.icon(
-      onPressed:
-          pickFromGallery,
-
-      icon:
-          const Icon(
+      onPressed: pickFromGallery,
+      icon: const Icon(
         Icons.photo,
       ),
-
-      label:
-          const Text(
+      label: const Text(
         'Galeri',
       ),
     ),
@@ -429,8 +420,11 @@ const SizedBox(
                 'Tulis ulasan...',
           ),
         ),
-      ],
-    );
+            ],
+    ),
+  ),
+);
+    
   },
 ),
 

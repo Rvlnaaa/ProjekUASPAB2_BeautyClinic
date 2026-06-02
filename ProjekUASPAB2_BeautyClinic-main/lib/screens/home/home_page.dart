@@ -31,6 +31,10 @@ class _HomePageState
 
   @override
   Widget build(BuildContext context) {
+
+final screenWidth =
+    MediaQuery.of(context).size.width;
+
    return ValueListenableBuilder<String>(
   valueListenable: languageNotifier,
 
@@ -313,85 +317,142 @@ const SizedBox(height: 25),
 
                         const SizedBox(height: 20),
 
-                        Row(
-                          mainAxisAlignment:
-                              MainAxisAlignment
-                                  .spaceAround,
+                      SizedBox(
+  width: double.infinity,
 
-                          children: [
+  child: Wrap(
+    alignment: WrapAlignment.center,
+    spacing: 30,
+    runSpacing: 20,
 
-                            GestureDetector(
-                              onTap: () {
+    children: [
 
-                                Navigator.push(
-                                  context,
+    GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                TreatmentDetailPage(
+              treatment:
+                  dummyTreatment[0],
+            ),
+          ),
+        );
+      },
 
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-    TreatmentDetailPage(
-  treatment:
-      dummyTreatment[0],
+      child: categoryItem(
+        Icons.face,
+        'Facial',
+      ),
+    ),
+
+    GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                TreatmentDetailPage(
+              treatment:
+                  dummyTreatment[1],
+            ),
+          ),
+        );
+      },
+
+      child: categoryItem(
+        Icons.spa,
+        'Therapy',
+      ),
+    ),
+
+    GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                TreatmentDetailPage(
+              treatment:
+                  dummyTreatment[2],
+            ),
+          ),
+        );
+      },
+
+      child: categoryItem(
+        Icons.auto_awesome,
+        'Glow',
+      ),
+    ),
+
+    GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                TreatmentDetailPage(
+              treatment:
+                  dummyTreatment[3],
+            ),
+          ),
+        );
+      },
+
+      child: categoryItem(
+        Icons.healing,
+        'Acne Care',
+      ),
+    ),
+
+    GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                TreatmentDetailPage(
+              treatment:
+                  dummyTreatment[4],
+            ),
+          ),
+        );
+      },
+
+      child: categoryItem(
+        Icons.water_drop,
+        'Whitening',
+      ),
+    ),
+
+    GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                TreatmentDetailPage(
+              treatment:
+                  dummyTreatment[5],
+            ),
+          ),
+        );
+      },
+
+      child: categoryItem(
+        Icons.auto_fix_high,
+        'Anti Aging',
+      ),
+    ),
+  ],
+  ),
 ),
-                                  ),
-                                );
-                              },
 
-                              child:
-                                  categoryItem(
-                                Icons.face,
-                                'Facial',
-                              ),
-                            ),
-
-                            GestureDetector(
-                              onTap: () {
-
-                                Navigator.push(
-                                  context,
-
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-    TreatmentDetailPage(
-  treatment:
-      dummyTreatment[1],
+const SizedBox(
+  height: 35,
 ),
-                                  ),
-                                );
-                              },
-
-                              child:
-                                  categoryItem(
-                                Icons.spa,
-                                'Therapy',
-                              ),
-                            ),
-
-                            GestureDetector(
-                              onTap: () {
-
-                                Navigator.push(
-                                  context,
-
-                                  MaterialPageRoute(
-                                   builder: (context) =>
-    TreatmentDetailPage(
-  treatment:
-      dummyTreatment[2],
-),
-                                  ),
-                                );
-                              },
-
-                              child:
-                                  categoryItem(
-                                Icons.auto_awesome,
-                                'Glow',
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        const SizedBox(height: 35),
 
 /// POPULAR CLINICS
 Text(
@@ -410,6 +471,8 @@ language == 'id'
 
 const SizedBox(height: 20),
 
+
+
 GridView.builder(
   shrinkWrap: true,
 
@@ -417,12 +480,26 @@ GridView.builder(
       const NeverScrollableScrollPhysics(),
 
   gridDelegate:
-      const SliverGridDelegateWithFixedCrossAxisCount(
-    crossAxisCount: 2,
-    crossAxisSpacing: 12,
-    mainAxisSpacing: 16,
-    childAspectRatio: 0.75,
-  ),
+    SliverGridDelegateWithFixedCrossAxisCount(
+  crossAxisCount:
+      MediaQuery.of(context)
+                  .size
+                  .width <
+              600
+          ? 1
+          : 2,
+
+  crossAxisSpacing: 12,
+  mainAxisSpacing: 16,
+
+  childAspectRatio:
+      MediaQuery.of(context)
+                  .size
+                  .width <
+              600
+          ? 1.4
+          : 1.8,
+),
 
   itemCount: dummyClinic.length,
 

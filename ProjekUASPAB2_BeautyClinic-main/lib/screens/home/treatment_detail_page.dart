@@ -28,6 +28,12 @@ class TreatmentDetailPage
       },
     ).toList();
 
+    for (var clinic in dummyClinic) {
+  print(
+    '${clinic.name} => ${clinic.treatments}',
+  );
+}
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -59,7 +65,7 @@ class TreatmentDetailPage
                 width:
                     double.infinity,
 
-                height: 220,
+                height: 320,
 
                 fit: BoxFit.cover,
               ),
@@ -101,6 +107,15 @@ class TreatmentDetailPage
                     FontWeight.bold,
               ),
             ),
+
+            Text(
+  'Treatment: ${treatment.name}',
+),
+
+Text(
+  'Jumlah Klinik: ${clinics.length}',
+),
+
 
             const SizedBox(
               height: 10,
