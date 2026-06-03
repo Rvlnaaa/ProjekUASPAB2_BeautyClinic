@@ -4,6 +4,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../models/clinic_model.dart';
 import '../../models/review_model.dart';
+import '../../models/dummy_notification.dart';
+import '../../models/notification_model.dart';
 import '../auth/login_page.dart';
 
 class ClinicDetailPage extends StatefulWidget {
@@ -117,19 +119,40 @@ class _ClinicDetailPageState
 
                 children: [
 
-                  /// NAMA KLINIK
-                  Text(
-                    widget.clinic.name,
+                 Row(
+  children: [
 
-                    style:
-                        const TextStyle(
-                      fontSize: 26,
+    Expanded(
+      child: Text(
+        widget.clinic.name,
+        style: const TextStyle(
+          fontSize: 26,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
 
-                      fontWeight:
-                          FontWeight.bold,
-                    ),
-                  ),
+    IconButton(
+      onPressed: () {
 
+        setState(() {
+
+          widget.clinic.isFavorite =
+              !widget.clinic.isFavorite;
+        });
+
+      },
+
+      icon: Icon(
+        widget.clinic.isFavorite
+            ? Icons.favorite
+            : Icons.favorite_border,
+
+        color: Colors.red,
+      ),
+    ),
+  ],
+),
                   const SizedBox(
                     height: 10,
                   ),
@@ -452,14 +475,24 @@ const SizedBox(
 );
                 });
 
-                reviewController.clear();
+               reviewController.clear();
 
 selectedImage = null;
 selectedRating = 0;
 
-                Navigator.pop(
-                  context,
-                );
+notifications.insert(
+  0,
+  NotificationModel(
+    title: 'Ulasan Baru',
+    message:
+        'Ulasan baru ditambahkan pada ${widget.clinic.name}',
+    dateTime: DateTime.now(),
+  ),
+);
+
+Navigator.pop(
+  context,
+);
               },
 
               child:
